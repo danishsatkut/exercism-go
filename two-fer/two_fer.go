@@ -5,11 +5,14 @@
 // https://golang.org/doc/effective_go.html#commentary
 package twofer
 
-// ShareWith should have a comment documenting it.
+import "fmt"
+
+// ShareWith returns a two-fer statement for a given name.
+// If no name is provided is replaces person's name with you.
 func ShareWith(name string) string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return ""
+	if name == "" {
+		name = "you"
+	}
+
+	return fmt.Sprintf("One for %v, one for me.", name)
 }
