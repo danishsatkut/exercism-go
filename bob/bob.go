@@ -7,23 +7,14 @@ package bob
 
 import "strings"
 
-// YELL
-// Question?
-// YELLED QUESTION?
-
-// Hey should have a comment documenting it.
+// Hey returns a response from Bob for a remark.
 func Hey(remark string) string {
 	remark = strings.TrimSpace(remark)
-
 	if remark == "" {
 		return "Fine. Be that way!"
 	}
 
 	if isQuestion(remark) {
-		if isNumerical(remark) {
-			return "Sure."
-		}
-
 		if isYelled(remark) {
 			return "Calm down, I know what I'm doing!"
 		}
@@ -31,12 +22,7 @@ func Hey(remark string) string {
 		return "Sure."
 	}
 
-
 	if isYelled(remark) {
-		if isNumerical(remark) {
-			return "Whatever."
-		}
-
 		return "Whoa, chill out!"
 	}
 
@@ -52,5 +38,5 @@ func isQuestion(remark string) bool {
 }
 
 func isYelled(remark string) bool {
-	return strings.ToUpper(remark) == remark
+	return strings.ToUpper(remark) == remark && !isNumerical(remark)
 }
