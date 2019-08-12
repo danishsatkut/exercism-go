@@ -7,6 +7,10 @@ package bob
 
 import "strings"
 
+// YELL
+// Question?
+// YELLED QUESTION?
+
 // Hey should have a comment documenting it.
 func Hey(remark string) string {
 	remark = strings.TrimSpace(remark)
@@ -15,12 +19,12 @@ func Hey(remark string) string {
 		return "Fine. Be that way!"
 	}
 
-	if strings.HasSuffix(remark, "?") {
-		if strings.ToUpper(remark) == strings.ToLower(remark) {
+	if isQuestion(remark) {
+		if isNumerical(remark) {
 			return "Sure."
 		}
 
-		if strings.ToUpper(remark) == remark {
+		if isYelled(remark) {
 			return "Calm down, I know what I'm doing!"
 		}
 
@@ -28,8 +32,8 @@ func Hey(remark string) string {
 	}
 
 
-	if strings.ToUpper(remark) == remark {
-		if strings.ToUpper(remark) == strings.ToLower(remark) {
+	if isYelled(remark) {
+		if isNumerical(remark) {
 			return "Whatever."
 		}
 
@@ -37,4 +41,16 @@ func Hey(remark string) string {
 	}
 
 	return "Whatever."
+}
+
+func isNumerical(remark string) bool {
+	return strings.ToUpper(remark) == strings.ToLower(remark)
+}
+
+func isQuestion(remark string) bool {
+	return strings.HasSuffix(remark, "?")
+}
+
+func isYelled(remark string) bool {
+	return strings.ToUpper(remark) == remark
 }
