@@ -5,11 +5,31 @@
 // https://golang.org/doc/effective_go.html#commentary
 package acronym
 
+import (
+	"strings"
+)
+
 // Abbreviate should have a comment documenting it.
 func Abbreviate(s string) string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return ""
+	r := strings.Fields(s)
+
+	//log.Printf("Fields: %v, Count: %v, First: %v", r, len(r), string(r[0][0]))
+
+	var abbr string
+
+	for _, word := range r {
+		if strings.Contains(word, "-") {
+			for _, w := range strings.Split(word, "-") {
+				abbr += Abbreviate(w)
+			}
+		} else if strings.Contains(word, "_") {
+			for _, w := range strings.Split(word, "_") {
+				abbr += Abbreviate(w)
+			}
+		} else {
+			abbr += string(word[0])
+		}
+	}
+
+	return strings.ToUpper(abbr)
 }
