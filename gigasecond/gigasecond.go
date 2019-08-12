@@ -5,15 +5,14 @@
 // https://golang.org/doc/effective_go.html#commentary
 package gigasecond
 
-// import path for the time package from the standard library
 import (
 	"math"
 	"time"
 )
 
-// AddGigasecond should have a comment documenting it.
-func AddGigasecond(t time.Time) time.Time {
-	gigasecond := time.Duration(math.Pow10(9)) * time.Second
+var gigasecond = time.Duration(math.Pow10(9)) * time.Second
 
+// AddGigasecond adds 10 ^ 9 seconds to specified time
+func AddGigasecond(t time.Time) time.Time {
 	return t.Add(gigasecond)
 }
