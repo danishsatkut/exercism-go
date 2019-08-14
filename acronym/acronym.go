@@ -10,14 +10,8 @@ import (
 )
 
 // Abbreviate should have a comment documenting it.
-func Abbreviate(s string) string {
-	r := strings.Fields(s)
-
-	//log.Printf("Fields: %v, Count: %v, First: %v", r, len(r), string(r[0][0]))
-
-	var abbr string
-
-	for _, word := range r {
+func Abbreviate(s string) (abbr string) {
+	for _, word := range strings.Fields(s) {
 		if strings.Contains(word, "-") {
 			for _, w := range strings.Split(word, "-") {
 				abbr += Abbreviate(w)
