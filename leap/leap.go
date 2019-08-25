@@ -7,5 +7,10 @@ package leap
 
 // IsLeapYear should have a comment documenting it.
 func IsLeapYear(year int) bool {
-	return (year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0)
+	return divisibleBy(year, 4) &&
+		(!divisibleBy(year, 100) || divisibleBy(year, 400))
+}
+
+func divisibleBy(year, n int) bool {
+	return year%n == 0
 }
