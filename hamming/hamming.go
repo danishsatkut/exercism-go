@@ -1,7 +1,12 @@
+// Package hamming provides functionality to calculate hamming distance
 package hamming
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// Distance function calculates the hamming distance for two dna strands.
+// It returns an error if the number of nucleotides differ between the two strands.
 func Distance(strand, otherStrand string) (int, error) {
 	var distance = 0
 
