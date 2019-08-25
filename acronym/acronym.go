@@ -18,5 +18,5 @@ func Abbreviate(s string) (abbr string) {
 }
 
 func isSeparator(r rune) bool {
-	return strings.Contains(separators, string(r))
+	return strings.ContainsRune(separators, r)
 }
