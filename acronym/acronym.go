@@ -1,7 +1,4 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package acronym should have a package comment that summarizes what it's about.
+// Package acronym implements abbreviation functionality.
 // https://golang.org/doc/effective_go.html#commentary
 package acronym
 
@@ -9,7 +6,7 @@ import (
 	"strings"
 )
 
-// Abbreviate should have a comment documenting it.
+// Abbreviate returns abbreviation for a long name.
 func Abbreviate(s string) (abbr string) {
 	for _, word := range strings.Fields(s) {
 		if strings.Contains(word, "-") {
