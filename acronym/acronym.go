@@ -4,8 +4,9 @@ package acronym
 
 import (
 	"strings"
-	"unicode"
 )
+
+const separators = " -_"
 
 // Abbreviate returns abbreviation for a long name.
 func Abbreviate(s string) (abbr string) {
@@ -17,5 +18,5 @@ func Abbreviate(s string) (abbr string) {
 }
 
 func isSeparator(r rune) bool {
-	return unicode.IsSpace(r) || string(r) == "-" || string(r) == "_"
+	return strings.Contains(separators, string(r))
 }
