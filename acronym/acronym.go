@@ -2,9 +2,7 @@
 // https://golang.org/doc/effective_go.html#commentary
 package acronym
 
-import (
-	"strings"
-)
+import "strings"
 
 const separators = " -_"
 
