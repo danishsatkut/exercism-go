@@ -20,8 +20,6 @@ const (
 
 // KindFromSides should have a comment documenting it.
 func KindFromSides(a, b, c float64) Kind {
-	var k Kind
-
 	if !isTriangle(a, b, c) {
 		return NaT
 	}
@@ -30,7 +28,7 @@ func KindFromSides(a, b, c float64) Kind {
 		return Equ
 	}
 
-	if (a != b && b == c) || (a != b && a == c) || (a != c && a == b) {
+	if (b == c) || (a == c) || (a == b) {
 		return Iso
 	}
 
@@ -38,7 +36,7 @@ func KindFromSides(a, b, c float64) Kind {
 		return Sca
 	}
 
-	return k
+	return NaT
 }
 
 func isSideValid(s float64) bool {
