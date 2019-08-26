@@ -22,11 +22,7 @@ const (
 func KindFromSides(a, b, c float64) Kind {
 	var k Kind
 
-	if isSideInvalid(a) || isSideInvalid(b) || isSideInvalid(c) {
-		return NaT
-	}
-
-	if !isTriangleInEqual(a, b, c) {
+	if !isTriangle(a, b, c) {
 		return NaT
 	}
 
@@ -45,8 +41,8 @@ func KindFromSides(a, b, c float64) Kind {
 	return k
 }
 
-func isSideInvalid(s float64) bool {
-	return s <= 0 || math.IsNaN(s) || math.IsInf(s, 0)
+func isSideValid(s float64) bool {
+	return !(s <= 0 || math.IsNaN(s) || math.IsInf(s, 0))
 }
 
 func isTriangleInEqual(a, b, c float64) bool {
@@ -54,5 +50,9 @@ func isTriangleInEqual(a, b, c float64) bool {
 }
 
 func isInEqual(x, y, z float64) bool {
-	return z <= x + y
+	return z <= x+y
+}
+
+func isTriangle(a, b, c float64) bool {
+	return isSideValid(a) && isSideValid(b) && isSideValid(c) && isTriangleInEqual(a, b, c)
 }
