@@ -20,21 +20,23 @@ const (
 
 // KindFromSides should have a comment documenting it.
 func KindFromSides(a, b, c float64) Kind {
-	t := triangle{a, b, c}
-
-	return t.kind()
+	return newTriangle(a, b, c).kind()
 }
 
 type triangle struct {
-	a, b, c float64
+	a, b, c side
+}
+
+func newTriangle(a, b, c float64) triangle {
+	return triangle{side(a), side(b), side(c)}
 }
 
 func (t triangle) isInEqual() bool {
-	return isInEqual(t.a, t.b, t.c) && isInEqual(t.a, t.c, t.b) && isInEqual(t.b, t.c, t.a)
+	return t.a.isInEqual(t.b, t.c) && t.b.isInEqual(t.a, t.c) && t.c.isInEqual(t.a, t.b)
 }
 
 func (t triangle) isValid() bool {
-	return isSideValid(t.a) && isSideValid(t.b) && isSideValid(t.c) && t.isInEqual()
+	return t.a.isValid() && t.b.isValid() && t.c.isValid() && t.isInEqual()
 }
 
 func (t triangle) kind() Kind {
@@ -42,25 +44,35 @@ func (t triangle) kind() Kind {
 		return NaT
 	}
 
-	if t.a == t.b && t.b == t.c {
+	if t.isEquilateral() {
 		return Equ
 	}
 
-	if (t.b == t.c) || (t.a == t.c) || (t.a == t.b) {
+	if t.isIsosceles() {
 		return Iso
 	}
 
-	if t.a != t.b && t.a != t.c && t.b != t.c {
-		return Sca
-	}
-
-	return NaT
+	return Sca
 }
 
-func isSideValid(s float64) bool {
-	return !(s <= 0 || math.IsNaN(s) || math.IsInf(s, 0))
+func (t triangle) isEquilateral() bool {
+	return t.a.isEqual(t.b) && t.b.isEqual(t.c)
 }
 
-func isInEqual(x, y, z float64) bool {
-	return z <= x+y
+func (t triangle) isIsosceles() bool {
+	return t.a.isEqual(t.b) || t.b.isEqual(t.c) || t.c.isEqual(t.a)
+}
+
+type side float64
+
+func (s side) isValid() bool {
+	return !(s <= 0 || math.IsNaN(float64(s)) || math.IsInf(float64(s), 0))
+}
+
+func (s side) isEqual(other side) bool {
+	return s == other
+}
+
+func (s side) isInEqual(x, y side) bool {
+	return s <= x+y
 }
