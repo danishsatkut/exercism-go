@@ -20,19 +20,37 @@ const (
 
 // KindFromSides should have a comment documenting it.
 func KindFromSides(a, b, c float64) Kind {
-	if !isTriangle(a, b, c) {
+	t := triangle{a, b, c}
+
+	return t.kind()
+}
+
+type triangle struct {
+	a, b, c float64
+}
+
+func (t triangle) isInEqual() bool {
+	return isInEqual(t.a, t.b, t.c) && isInEqual(t.a, t.c, t.b) && isInEqual(t.b, t.c, t.a)
+}
+
+func (t triangle) isValid() bool {
+	return isSideValid(t.a) && isSideValid(t.b) && isSideValid(t.c) && t.isInEqual()
+}
+
+func (t triangle) kind() Kind {
+	if !t.isValid() {
 		return NaT
 	}
 
-	if a == b && b == c {
+	if t.a == t.b && t.b == t.c {
 		return Equ
 	}
 
-	if (b == c) || (a == c) || (a == b) {
+	if (t.b == t.c) || (t.a == t.c) || (t.a == t.b) {
 		return Iso
 	}
 
-	if a != b && a != c && b != c {
+	if t.a != t.b && t.a != t.c && t.b != t.c {
 		return Sca
 	}
 
@@ -43,14 +61,6 @@ func isSideValid(s float64) bool {
 	return !(s <= 0 || math.IsNaN(s) || math.IsInf(s, 0))
 }
 
-func isTriangleInEqual(a, b, c float64) bool {
-	return isInEqual(a, b, c) && isInEqual(a, c, b) && isInEqual(b, c, a)
-}
-
 func isInEqual(x, y, z float64) bool {
 	return z <= x+y
-}
-
-func isTriangle(a, b, c float64) bool {
-	return isSideValid(a) && isSideValid(b) && isSideValid(c) && isTriangleInEqual(a, b, c)
 }
