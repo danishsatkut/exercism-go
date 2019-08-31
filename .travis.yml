@@ -11,5 +11,5 @@ before_script:
 
 script:
   - diff -u <(echo -n) <(gofmt -d ./)
-  - golint ./
+  - golint ./...
   - go test ./...
