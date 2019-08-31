@@ -2,6 +2,7 @@ package space
 
 import "fmt"
 
+// Planet represents a planet
 type Planet string
 
 const earthYearInSeconds = 60 * 60 * 24 * 365.25
@@ -17,6 +18,7 @@ var planetEarthYears = map[Planet]float64{
 	"Neptune": 164.79132 * earthYearInSeconds,
 }
 
+// Age returns the age on a planet in earth years.
 func Age(s float64, p Planet) float64 {
 	if yearsInSecond, ok := planetEarthYears[p]; ok {
 		return s / yearsInSecond

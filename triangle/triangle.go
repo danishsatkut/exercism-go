@@ -3,8 +3,10 @@ package triangle
 
 import "math"
 
+// Kind represents kind of triangle
 type Kind int
 
+// Constants to represent types of triangles
 const (
 	NaT Kind = iota // not a triangle
 	Equ             // equilateral
