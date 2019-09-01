@@ -2,7 +2,7 @@
 package hamming
 
 import (
-	"fmt"
+	"errors"
 )
 
 // Distance function calculates the hamming distance for two dna strands.
@@ -11,7 +11,7 @@ func Distance(strand, otherStrand string) (int, error) {
 	var distance = 0
 
 	if len(strand) != len(otherStrand) {
-		return 0, fmt.Errorf("strands contain different number of nucleotides")
+		return 0, errors.New("strands contain different number of nucleotides")
 	}
 
 	for i := 0; i < len(strand); i++ {
