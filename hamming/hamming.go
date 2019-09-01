@@ -16,7 +16,7 @@ func Distance(strand, otherStrand string) (int, error) {
 
 	for i := 0; i < len(strand); i++ {
 		if strand[i] != otherStrand[i] {
-			distance += 1
+			distance++
 		}
 	}
 
