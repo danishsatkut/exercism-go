@@ -8,11 +8,11 @@ import (
 // Distance function calculates the hamming distance for two dna strands.
 // It returns an error if the number of nucleotides differ between the two strands.
 func Distance(strand, otherStrand string) (int, error) {
-	var distance = 0
-
 	if len(strand) != len(otherStrand) {
 		return 0, errors.New("strands contain different number of nucleotides")
 	}
+
+	var distance = 0
 
 	for i := 0; i < len(strand); i++ {
 		if strand[i] != otherStrand[i] {
