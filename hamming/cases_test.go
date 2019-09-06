@@ -64,4 +64,16 @@ var testCases = []struct {
 		0,
 		true,
 	},
+	{ // allow special characters
+		"Ϟ",
+		"A",
+		1,
+		false,
+	},
+	{ // allow special characters
+		"ϞA",
+		"AϞ",
+		2,
+		false,
+	},
 }
