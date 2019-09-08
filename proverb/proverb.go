@@ -9,19 +9,22 @@ import "fmt"
 
 // Proverb should have a comment documenting it.
 func Proverb(rhyme []string) []string {
-	var lines []string
+	totalWords := len(rhyme)
+	lines := make([]string, 0, totalWords)
 
-	if len(rhyme) == 0 {
+	if totalWords == 0 {
 		return lines
 	}
 
-	for i := 0; i < len(rhyme) - 1; i++ {
-		line := fmt.Sprintf("For want of a %v the %v was lost.", rhyme[i], rhyme[i+1])
-
-		lines = append(lines, line)
+	for i := 0; i < totalWords-1; i++ {
+		lines = append(lines, proverbLine(rhyme[i], rhyme[i+1]))
 	}
 
-	lines = append(lines, fmt.Sprintf("And all for the want of a %v.", rhyme[0]))
+	lines = append(lines, fmt.Sprintf("And all for the want of a %s.", rhyme[0]))
 
 	return lines
+}
+
+func proverbLine(action, consequence string) string {
+	return fmt.Sprintf("For want of a %s the %s was lost.", action, consequence)
 }
