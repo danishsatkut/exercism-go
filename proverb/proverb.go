@@ -1,13 +1,9 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package proverb should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+// Package proverb provides functionality to generate "For Want of a Nail" proverb.
 package proverb
 
 import "fmt"
 
-// Proverb should have a comment documenting it.
+// Proverb generates the proverb for provided words.
 func Proverb(rhyme []string) []string {
 	totalWords := len(rhyme)
 	lines := make([]string, 0, totalWords)
