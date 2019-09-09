@@ -2,24 +2,28 @@ package raindrops
 
 import "fmt"
 
-func Convert(n int) string {
+func Convert(number int) string {
 	var message string
 
-	if n%3 == 0 {
+	if isFactorOf(number, 3) {
 		message += "Pling"
 	}
 
-	if n%5 == 0 {
+	if isFactorOf(number, 5) {
 		message += "Plang"
 	}
 
-	if n%7 == 0 {
+	if isFactorOf(number, 7) {
 		message += "Plong"
 	}
 
 	if message == "" {
-		message = fmt.Sprintf("%d", n)
+		return fmt.Sprintf("%d", number)
 	}
 
 	return message
+}
+
+func isFactorOf(m, n int) bool {
+	return m%n == 0
 }
