@@ -1,7 +1,9 @@
+// Package raindrops provides functionality to generate raindrops for numbers.
 package raindrops
 
 import "fmt"
 
+// Convert converts a number to raindrops string.
 func Convert(number int) string {
 	var message string
 
