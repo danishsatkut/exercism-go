@@ -1,7 +1,7 @@
 // Package raindrops provides functionality to generate raindrops for numbers.
 package raindrops
 
-import "fmt"
+import "strconv"
 
 // Convert converts a number to raindrops string.
 func Convert(number int) string {
@@ -20,7 +20,7 @@ func Convert(number int) string {
 	}
 
 	if message == "" {
-		return fmt.Sprintf("%d", number)
+		return strconv.Itoa(number)
 	}
 
 	return message
