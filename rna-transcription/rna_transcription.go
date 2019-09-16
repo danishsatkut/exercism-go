@@ -1,7 +1,9 @@
+// Package strand provides functionality related to DNA and RNA strands.
 package strand
 
 import "errors"
 
+// ToRNA converts a DNA strand into a RNA strand
 func ToRNA(dna string) string {
 	var rna string
 
