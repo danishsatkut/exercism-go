@@ -5,11 +5,3 @@ go:
 
 env:
   - GO111MODULE="on"
-
-before_script:
-  - go get -u golang.org/x/lint/golint
-
-script:
-  - diff -u <(echo -n) <(gofmt -d ./)
-  - diff -u <(echo -n) <(golint ./...)
-  - go test ./...
