@@ -3,6 +3,9 @@ travis: setup gofmt golint tests;
 tests: ;
 	go test ./...
 
+benchmark: ;
+	go test ./... -v --bench . --benchmem
+
 gofmt: ;
 	bash -c "diff -u <(echo -n) <(gofmt -d ./)"
 
