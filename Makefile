@@ -1,4 +1,4 @@
-travis: gofmt golint tests;
+travis: setup gofmt golint tests;
 
 tests: ;
 	go test ./...
@@ -6,7 +6,7 @@ tests: ;
 gofmt: ;
 	bash -c "diff -u <(echo -n) <(gofmt -d ./)"
 
-golint: setup ;
+golint: ;
 	bash -c "diff -u <(echo -n) <(golint ./...)"
 
 setup: ;
