@@ -1,3 +1,4 @@
+// Package scrabble provides functionality to calculate scrabble score
 package scrabble
 
 import "strings"
@@ -12,6 +13,7 @@ var alphabetScores = map[int]string{
 	10: "QZ",
 }
 
+// Score calculates scrabble score for a word
 func Score(word string) int {
 	var score int
 	letters := []rune(strings.ToUpper(word))
