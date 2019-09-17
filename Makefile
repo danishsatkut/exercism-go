@@ -1,10 +1,12 @@
+dir = ./...
+
 travis: setup gofmt golint tests;
 
 tests: ;
-	go test ./...
+	go test $(dir)
 
 benchmark: ;
-	go test ./... -v --bench . --benchmem
+	go test $(dir) -v --bench . --benchmem
 
 gofmt: ;
 	bash -c "diff -u <(echo -n) <(gofmt -d ./)"
