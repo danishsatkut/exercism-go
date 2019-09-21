@@ -2,10 +2,6 @@ package dna
 
 import "errors"
 
-// Histogram is a mapping from nucleotide to its count in given DNA.
-// Choose a suitable data type.
-type Histogram map[rune]int
-
 // DNA is a list of nucleotides. Choose a suitable data type.
 type DNA []rune
 
@@ -16,11 +12,11 @@ type DNA []rune
 // The receiver appears in its own argument list between the func keyword and the method name.
 // Here, the Counts method has a receiver of type DNA named d.
 func (d DNA) Counts() (Histogram, error) {
-	h := NewHistogram()
+	h := newHistogram()
 
 	for _, nucleotide := range d {
 		if _, ok := h[nucleotide]; !ok {
-			return nil, errors.New("invalid nucleotide: ")
+			return nil, errors.New("invalid nucleotide")
 		}
 
 		h[nucleotide]++
@@ -29,7 +25,11 @@ func (d DNA) Counts() (Histogram, error) {
 	return h, nil
 }
 
-func NewHistogram() Histogram {
+// Histogram is a mapping from nucleotide to its count in given DNA.
+// Choose a suitable data type.
+type Histogram map[rune]int
+
+func newHistogram() Histogram {
 	return Histogram{
 		'A': 0,
 		'C': 0,
