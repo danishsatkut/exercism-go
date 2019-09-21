@@ -36,17 +36,9 @@ var alphabetScores = map[rune]int{
 func Score(word string) int {
 	var score int
 
-	for _, l := range word {
-		score += letterScore(l)
+	for _, letter := range word {
+		score += alphabetScores[unicode.ToUpper(letter)]
 	}
 
 	return score
-}
-
-func letterScore(letter rune) int {
-	if score, ok := alphabetScores[unicode.ToUpper(letter)]; ok {
-		return score
-	}
-
-	panic("not a valid alphabet: " + string(letter))
 }
