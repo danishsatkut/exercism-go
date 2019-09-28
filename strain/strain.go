@@ -58,8 +58,20 @@ func (s Strings) Discard(func(string) bool) Strings {
 
 type Lists []Ints
 
-func (l Lists) Keep(func([]int) bool) Lists {
-	return Lists{}
+func (l Lists) Keep(predicate func([]int) bool) Lists {
+	if l == nil {
+		return nil
+	}
+
+	results := make(Lists, 0, len(l))
+
+	for _, list := range l {
+		if predicate(list) {
+			results = append(results, list)
+		}
+	}
+
+	return results
 }
 
 func (l Lists) Discard(func([]int) bool) Lists {
