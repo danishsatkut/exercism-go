@@ -2,8 +2,20 @@ package strain
 
 type Ints []int
 
-func (i Ints) Keep(func(int) bool) Ints {
-	return Ints{}
+func (i Ints) Keep(predicate func(int) bool) Ints {
+	if i == nil {
+		return nil
+	}
+
+	results := make(Ints, 0, len(i))
+
+	for _, n := range i {
+		if predicate(n) {
+			results = append(results, n)
+		}
+	}
+
+	return results
 }
 
 func (i Ints) Discard(func(int) bool) Ints {
