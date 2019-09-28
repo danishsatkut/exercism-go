@@ -1,7 +1,9 @@
 package strain
 
+// Ints is a collection of int
 type Ints []int
 
+// Keep returns a new Ints containing those int where the predicate is true
 func (i Ints) Keep(predicate func(int) bool) Ints {
 	if i == nil {
 		return nil
@@ -18,6 +20,7 @@ func (i Ints) Keep(predicate func(int) bool) Ints {
 	return results
 }
 
+// Discard returns a new Ints containing those int where the predicate is false
 func (i Ints) Discard(predicate func(int) bool) Ints {
 	if i == nil {
 		return nil
@@ -34,8 +37,10 @@ func (i Ints) Discard(predicate func(int) bool) Ints {
 	return results
 }
 
+// Strings is a collection of string
 type Strings []string
 
+// Keep returns a new Strings containing those string where the predicate is true
 func (s Strings) Keep(predicate func(string) bool) Strings {
 	if s == nil {
 		return nil
@@ -52,12 +57,15 @@ func (s Strings) Keep(predicate func(string) bool) Strings {
 	return results
 }
 
+// Discard returns a new Strings containing those string where the predicate is false
 func (s Strings) Discard(func(string) bool) Strings {
 	return Strings{}
 }
 
+// Lists is a collection of Ints
 type Lists []Ints
 
+// Keep returns a new List containing those Ints where the predicate is true
 func (l Lists) Keep(predicate func([]int) bool) Lists {
 	if l == nil {
 		return nil
@@ -74,6 +82,7 @@ func (l Lists) Keep(predicate func([]int) bool) Lists {
 	return results
 }
 
+// Discard returns a new List containing those Ints where the predicate is false
 func (l Lists) Discard(func([]int) bool) Lists {
 	return Lists{}
 }
