@@ -18,7 +18,7 @@ func IsIsogram(word string) bool {
 
 		r = unicode.ToLower(r)
 
-		if _, ok := occurrences[r]; ok {
+		if occurrences[r] {
 			return false
 		}
 
