@@ -36,8 +36,20 @@ func (i Ints) Discard(predicate func(int) bool) Ints {
 
 type Strings []string
 
-func (s Strings) Keep(func(string) bool) Strings {
-	return Strings{}
+func (s Strings) Keep(predicate func(string) bool) Strings {
+	if s == nil {
+		return nil
+	}
+
+	results := make(Strings, 0, len(s))
+
+	for _, el := range s {
+		if predicate(el) {
+			results = append(results, el)
+		}
+	}
+
+	return results
 }
 
 func (s Strings) Discard(func(string) bool) Strings {
