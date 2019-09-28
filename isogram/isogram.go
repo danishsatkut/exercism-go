@@ -1,13 +1,18 @@
 package isogram
 
-import "unicode"
+import (
+	"strings"
+	"unicode"
+)
+
+const skipCharacters = "- "
 
 // IsIsogram determines if the word is an isogram.
 func IsIsogram(word string) bool {
 	var occurrences = make(map[rune]bool)
 
 	for _, r := range word {
-		if r == '-' || r == ' ' {
+		if strings.ContainsRune(skipCharacters, r) {
 			continue
 		}
 
