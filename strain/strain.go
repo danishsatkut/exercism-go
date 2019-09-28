@@ -19,3 +19,13 @@ func (s Strings) Keep(func(string) bool) Strings {
 func (s Strings) Discard(func(string) bool) Strings {
 	return Strings{}
 }
+
+type Lists []Ints
+
+func (l Lists) Keep(func([]int) bool) Lists {
+	return Lists{}
+}
+
+func (l Lists) Discard(func([]int) bool) Lists {
+	return Lists{}
+}
