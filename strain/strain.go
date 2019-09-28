@@ -5,23 +5,27 @@ type Ints []int
 
 // Keep returns a new Ints containing those int where the predicate is true
 func (i Ints) Keep(predicate func(int) bool) Ints {
-	if i == nil {
-		return nil
-	}
-
-	results := make(Ints, 0, len(i))
-
-	for _, n := range i {
+	return i.eachWith(func(results Ints, n int) Ints {
 		if predicate(n) {
-			results = append(results, n)
+			return append(results, n)
 		}
-	}
 
-	return results
+		return results
+	})
 }
 
 // Discard returns a new Ints containing those int where the predicate is false
 func (i Ints) Discard(predicate func(int) bool) Ints {
+	return i.eachWith(func(results Ints, n int) Ints {
+		if !predicate(n) {
+			return append(results, n)
+		}
+
+		return results
+	})
+}
+
+func (i Ints) eachWith(operation func(Ints, int) Ints) Ints {
 	if i == nil {
 		return nil
 	}
@@ -29,9 +33,7 @@ func (i Ints) Discard(predicate func(int) bool) Ints {
 	results := make(Ints, 0, len(i))
 
 	for _, n := range i {
-		if !predicate(n) {
-			results = append(results, n)
-		}
+		results = operation(results, n)
 	}
 
 	return results
@@ -58,9 +60,9 @@ func (s Strings) Keep(predicate func(string) bool) Strings {
 }
 
 // Discard returns a new Strings containing those string where the predicate is false
-func (s Strings) Discard(func(string) bool) Strings {
-	return Strings{}
-}
+//func (s Strings) Discard(func(string) bool) Strings {
+//	return Strings{}
+//}
 
 // Lists is a collection of Ints
 type Lists []Ints
@@ -83,6 +85,6 @@ func (l Lists) Keep(predicate func([]int) bool) Lists {
 }
 
 // Discard returns a new List containing those Ints where the predicate is false
-func (l Lists) Discard(func([]int) bool) Lists {
-	return Lists{}
-}
+//func (l Lists) Discard(func([]int) bool) Lists {
+//	return Lists{}
+//}
