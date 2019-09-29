@@ -9,7 +9,7 @@ func IsIsogram(word string) bool {
 	var occurrences = make(map[rune]bool)
 
 	for _, r := range word {
-		if r == ' ' || r == '-'  {
+		if r == ' ' || r == '-' {
 			continue
 		}
 
