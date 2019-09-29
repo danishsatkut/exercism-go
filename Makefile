@@ -1,6 +1,6 @@
 dir = ./...
 
-travis: setup gofmt golint tests;
+travis: setup tests gofmt golint;
 
 tests: ;
 	go test $(dir)
