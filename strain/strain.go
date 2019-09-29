@@ -59,11 +59,6 @@ func (s Strings) Keep(predicate func(string) bool) Strings {
 	return results
 }
 
-// Discard returns a new Strings containing those string where the predicate is false
-//func (s Strings) Discard(func(string) bool) Strings {
-//	return Strings{}
-//}
-
 // Lists is a collection of Ints
 type Lists []Ints
 
@@ -83,8 +78,3 @@ func (l Lists) Keep(predicate func([]int) bool) Lists {
 
 	return results
 }
-
-// Discard returns a new List containing those Ints where the predicate is false
-//func (l Lists) Discard(func([]int) bool) Lists {
-//	return Lists{}
-//}
