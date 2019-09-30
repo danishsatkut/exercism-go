@@ -19,11 +19,13 @@ func SumOfSquares(n int) int {
 
 // SquareOfSum calculates the square of sum of first N natural numbers.
 func SquareOfSum(n int) int {
-	var total int
+	sum := sumOf(n)
 
-	for i := 1; i <= n; i++ {
-		total += i
-	}
+	return sum * sum
+}
 
-	return total * total
+func sumOf(n int) int {
+	m := float64(n)
+
+	return int((m / 2) * (m + 1))
 }
