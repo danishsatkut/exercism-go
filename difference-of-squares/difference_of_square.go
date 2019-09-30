@@ -8,13 +8,9 @@ func Difference(n int) int {
 
 // SumOfSquares calculates the sum of squares of first N natural numbers.
 func SumOfSquares(n int) int {
-	var total int
+	m := float64(n)
 
-	for i := 1; i <= n; i++ {
-		total += i * i
-	}
-
-	return total
+	return int((m * (m + 1) * (2 * m + 1)) / 6)
 }
 
 // SquareOfSum calculates the square of sum of first N natural numbers.
