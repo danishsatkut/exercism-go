@@ -1,5 +1,6 @@
 package reverse
 
+// Reverse performs string reversal
 func Reverse(s string) string {
 	r := []rune(s)
 	count := len(r)
