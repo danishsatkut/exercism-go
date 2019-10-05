@@ -13,13 +13,7 @@ func SumOfSquares(n int) int {
 
 // SquareOfSum calculates the square of sum of first N natural numbers.
 func SquareOfSum(n int) int {
-	sum := sumOf(n)
+	sum := (n * (n + 1)) / 2
 
 	return sum * sum
-}
-
-func sumOf(n int) int {
-	m := float64(n)
-
-	return int((m / 2) * (m + 1))
 }
