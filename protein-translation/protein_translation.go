@@ -1,5 +1,9 @@
 package protein
 
+import "errors"
+
+var ErrStop = errors.New("terminating codon")
+
 func FromCodon(codon string) (string, error) {
 	switch codon {
 	case "AUG":
@@ -16,6 +20,8 @@ func FromCodon(codon string) (string, error) {
 		return "Cysteine", nil
 	case "UGG":
 		return "Tryptophan", nil
+	case "UAA", "UAG", "UGA":
+		return "", ErrStop
 	}
 
 	return "", nil
