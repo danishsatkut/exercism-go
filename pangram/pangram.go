@@ -12,7 +12,7 @@ func IsPangram(sentence string) bool {
 	var occurence = make(map[rune]bool)
 
 	for _, l := range sentence {
-		if unicode.IsSpace(l) || l == '_' || unicode.IsDigit(l) || unicode.IsPunct(l) {
+		if !unicode.IsLetter(l) {
 			continue
 		}
 
