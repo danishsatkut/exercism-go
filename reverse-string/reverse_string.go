@@ -1,16 +1,12 @@
 package reverse
 
-import "bytes"
-
 // Reverse performs string reversal
 func Reverse(s string) string {
-	var output bytes.Buffer
-
 	r := []rune(s)
 
-	for i := len(r) - 1; i >= 0; i-- {
-		output.WriteRune(r[i])
+	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
 	}
 
-	return output.String()
+	return string(r)
 }
