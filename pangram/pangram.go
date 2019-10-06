@@ -2,6 +2,8 @@ package pangram
 
 import "unicode"
 
+const alphabetsInEnglish = 26
+
 // IsPangram determines if a sentence is a pangram.
 // A pangram is a sentence using every letter of the alphabet at least once.
 func IsPangram(sentence string) bool {
@@ -19,5 +21,5 @@ func IsPangram(sentence string) bool {
 		occurence[unicode.ToLower(l)] = true
 	}
 
-	return len(occurence) == 26
+	return len(occurence) == alphabetsInEnglish
 }
