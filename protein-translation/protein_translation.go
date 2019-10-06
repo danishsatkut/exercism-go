@@ -6,7 +6,7 @@ import (
 
 var (
 	// ErrStop represents an error for STOP codon
-	ErrStop        = errors.New("terminating codon")
+	ErrStop = errors.New("terminating codon")
 
 	// ErrInvalidBase represents an error for invalid RNA
 	ErrInvalidBase = errors.New("invalid base")
