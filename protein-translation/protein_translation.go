@@ -2,7 +2,10 @@ package protein
 
 import "errors"
 
-var ErrStop = errors.New("terminating codon")
+var (
+	ErrStop        = errors.New("terminating codon")
+	ErrInvalidBase = errors.New("invalid base")
+)
 
 func FromCodon(codon string) (string, error) {
 	switch codon {
@@ -24,5 +27,5 @@ func FromCodon(codon string) (string, error) {
 		return "", ErrStop
 	}
 
-	return "", nil
+	return "", ErrInvalidBase
 }
