@@ -14,7 +14,7 @@ var (
 
 // FromRNA converts RNA sequence into proteins
 func FromRNA(rna string) ([]string, error) {
-	var polypeptide []string
+	var polypeptide = make([]string, 0, len(rna)/3)
 
 	for i := 0; i < len(rna); i += 3 {
 		protein, err := FromCodon(rna[i : i+3])
