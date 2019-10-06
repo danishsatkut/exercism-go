@@ -14,22 +14,22 @@ var (
 
 // FromRNA converts RNA sequence into proteins
 func FromRNA(rna string) ([]string, error) {
-	var polypeptide = make([]string, 0, len(rna)/3)
+	var proteins = make([]string, 0, len(rna)/3)
 
 	for i := 0; i < len(rna); i += 3 {
 		protein, err := FromCodon(rna[i : i+3])
-		if err != nil {
-			if err == ErrStop {
-				return polypeptide, nil
-			}
-
-			return polypeptide, err
+		if err == ErrStop {
+			break
 		}
 
-		polypeptide = append(polypeptide, protein)
+		if err != nil {
+			return proteins, err
+		}
+
+		proteins = append(proteins, protein)
 	}
 
-	return polypeptide, nil
+	return proteins, nil
 }
 
 // FromCodon converts codon into protein
