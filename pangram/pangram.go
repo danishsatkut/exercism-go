@@ -9,7 +9,7 @@ func IsPangram(sentence string) bool {
 
 	for _, l := range sentence {
 		if unicode.IsLetter(l) {
-			alphabets[unicode.ToLower(l) - 'a']++
+			alphabets[unicode.ToLower(l)-'a']++
 		}
 	}
 
