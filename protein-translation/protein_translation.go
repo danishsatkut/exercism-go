@@ -5,10 +5,14 @@ import (
 )
 
 var (
+	// ErrStop represents an error for STOP codon
 	ErrStop        = errors.New("terminating codon")
+
+	// ErrInvalidBase represents an error for invalid RNA
 	ErrInvalidBase = errors.New("invalid base")
 )
 
+// FromRNA converts RNA sequence into proteins
 func FromRNA(rna string) ([]string, error) {
 	var polypeptide []string
 
@@ -28,6 +32,7 @@ func FromRNA(rna string) ([]string, error) {
 	return polypeptide, nil
 }
 
+// FromCodon converts codon into protein
 func FromCodon(codon string) (string, error) {
 	switch codon {
 	case "AUG":
