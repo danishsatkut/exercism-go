@@ -9,13 +9,18 @@ import (
 func Valid(number string) bool {
 	number = strings.ReplaceAll(number, " ", "")
 
-	var totalDigits = len(number)
-	if totalDigits <= 1 {
+	if len(number) <= 1 {
 		return false
 	}
 
-	var sum int
-	var pos = totalDigits % 2
+	return isMod10(number)
+}
+
+func isMod10(number string) bool {
+	var (
+		sum = 0
+		pos = len(number) % 2
+	)
 
 	for i, r := range number {
 		if !unicode.IsNumber(r) {
@@ -24,17 +29,22 @@ func Valid(number string) bool {
 
 		n := int(r - '0')
 
-		if i == pos {
-			n = n * 2
-			if n > 9 {
-				n = n - 9
-			}
-
-			pos += 2
+		// Double every other digit
+		if i%2 == pos {
+			n = double(n)
 		}
 
 		sum += n
 	}
 
-	return sum % 10 == 0
+	return sum%10 == 0
+}
+
+func double(n int) int {
+	n = n * 2
+	if n > 9 {
+		n = n - 9
+	}
+
+	return n
 }
