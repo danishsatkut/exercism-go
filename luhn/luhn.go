@@ -8,13 +8,15 @@ import (
 func Valid(number string) bool {
 	number = strings.ReplaceAll(number, " ", "")
 
-	if len(number) <= 1 {
+	var totalDigits = len(number)
+
+	if totalDigits <= 1 {
 		return false
 	}
 
-	var digits = make([]int, 0, len(number))
+	var sum int
 
-	for i, j := 0, len(number) % 2; i < len(number); i++ {
+	for i, j := 0, totalDigits % 2; i < totalDigits; i++ {
 		n, err := strconv.Atoi(string(number[i]))
 		if err != nil {
 			return false
@@ -29,12 +31,6 @@ func Valid(number string) bool {
 			j += 2
 		}
 
-		digits = append(digits, n)
-	}
-
-	var sum int
-
-	for _, n := range digits {
 		sum += n
 	}
 
