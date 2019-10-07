@@ -1,8 +1,8 @@
 package luhn
 
 import (
-	"strconv"
 	"strings"
+	"unicode"
 )
 
 // Valid determines if a number is valid as per the Luhn algorithm.
@@ -10,26 +10,27 @@ func Valid(number string) bool {
 	number = strings.ReplaceAll(number, " ", "")
 
 	var totalDigits = len(number)
-
 	if totalDigits <= 1 {
 		return false
 	}
 
 	var sum int
+	var pos = totalDigits % 2
 
-	for i, j := 0, totalDigits % 2; i < totalDigits; i++ {
-		n, err := strconv.Atoi(string(number[i]))
-		if err != nil {
+	for i, r := range number {
+		if !unicode.IsNumber(r) {
 			return false
 		}
 
-		if i == j {
+		n := int(r - '0')
+
+		if i == pos {
 			n = n * 2
 			if n > 9 {
 				n = n - 9
 			}
 
-			j += 2
+			pos += 2
 		}
 
 		sum += n
