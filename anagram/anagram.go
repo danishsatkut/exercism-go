@@ -28,19 +28,15 @@ func isAnagram(word, candidate string) bool {
 		return false
 	}
 
-	subjectLetterCount := calculateLetterCount(word)
-	candidateLetterCount := calculateLetterCount(candidate)
+	subjectLetterCount := newLetterCount(word)
+	candidateLetterCount := newLetterCount(candidate)
 
-	for r, count := range subjectLetterCount {
-		if candidateLetterCount[r] != count {
-			return false
-		}
-	}
-
-	return true
+	return subjectLetterCount.equal(candidateLetterCount)
 }
 
-func calculateLetterCount(word string) map[rune]int {
+type letterCount map[rune]int
+
+func newLetterCount(word string) letterCount {
 	var letterCount = make(map[rune]int)
 
 	for _, r := range word {
@@ -48,4 +44,14 @@ func calculateLetterCount(word string) map[rune]int {
 	}
 
 	return letterCount
+}
+
+func (l letterCount) equal(other letterCount) bool {
+	for r, count := range l {
+		if other[r] != count {
+			return false
+		}
+	}
+
+	return true
 }
