@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Valid determines if a number is valid as per the Luhn algorithm.
 func Valid(number string) bool {
 	number = strings.ReplaceAll(number, " ", "")
 
