@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// Detect returns anagrams for a word from possible candidates.
 func Detect(word string, candidates []string) []string {
 	var anagrams = make([]string, 0, len(candidates))
 
