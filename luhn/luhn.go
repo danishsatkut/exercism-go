@@ -41,7 +41,7 @@ func isMod10(number string) bool {
 }
 
 func double(n int) int {
-	n = n * 2
+	n *= 2
 	if n > 9 {
 		n = n - 9
 	}
