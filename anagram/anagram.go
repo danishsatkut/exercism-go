@@ -9,14 +9,14 @@ import (
 func Detect(word string, candidates []string) []string {
 	var anagrams = make([]string, 0, len(candidates))
 
-	sc := newLetterCount(word)
+	sc := letterCount(word)
 
 	for _, candidate := range candidates {
 		if len(word) != len(candidate) || strings.EqualFold(word, candidate) {
 			continue
 		}
 
-		if sc == newLetterCount(candidate) {
+		if sc == letterCount(candidate) {
 			anagrams = append(anagrams, candidate)
 		}
 	}
@@ -24,16 +24,16 @@ func Detect(word string, candidates []string) []string {
 	return anagrams
 }
 
-type letterCount [26]int
+type counts [26]int
 
-func newLetterCount(word string) letterCount {
-	var letters = letterCount{}
+func letterCount(word string) counts {
+	var count = counts{}
 
 	for _, r := range word {
 		if unicode.IsLetter(r) {
-			letters[unicode.ToUpper(r)-'A']++
+			count[unicode.ToUpper(r)-'A']++
 		}
 	}
 
-	return letters
+	return count
 }
