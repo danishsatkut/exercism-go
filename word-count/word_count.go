@@ -12,15 +12,15 @@ type Frequency map[string]int
 func WordCount(phrase string) Frequency {
 	f := Frequency{}
 
-	words := strings.FieldsFunc(phrase, func(r rune) bool {
-		return !(unicode.IsLetter(r) || unicode.IsDigit(r) || r == '\'')
-	})
-
-	for _, word := range words {
+	for _, word := range strings.FieldsFunc(phrase, isSeparator) {
 		word = strings.Trim(word, "'")
 
 		f[strings.ToLower(word)]++
 	}
 
 	return f
+}
+
+func isSeparator(r rune) bool {
+	return !(unicode.IsLetter(r) || unicode.IsDigit(r) || r == '\'')
 }
