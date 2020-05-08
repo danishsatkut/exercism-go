@@ -6,6 +6,7 @@ import (
 	"unicode"
 )
 
+// RunLengthEncode encodes the provided string
 func RunLengthEncode(input string) string {
 	var encoded string
 
@@ -40,6 +41,7 @@ func RunLengthEncode(input string) string {
 	return encoded
 }
 
+// RunLengthDecode decodes the provided string
 func RunLengthDecode(input string) string {
 	var decoded string
 	var previousNumber = 0
