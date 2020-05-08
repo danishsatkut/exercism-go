@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Frequency represents count of occurrences of each word
 type Frequency map[string]int
 
 var (
@@ -13,6 +14,7 @@ var (
 	quotedWord    = regexp.MustCompile(`^\'(\w+)\'$`)
 )
 
+// WordCount calculates the occurrence of each word in a phrase
 func WordCount(sentence string) Frequency {
 	f := Frequency{}
 
