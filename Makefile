@@ -15,4 +15,4 @@ golint: ;
 	bash -c "diff -u <(echo -n) <(golint ./...)"
 
 setup: ;
-	go get -u golang.org/x/lint/golint
+	go get golang.org/x/lint/golint
