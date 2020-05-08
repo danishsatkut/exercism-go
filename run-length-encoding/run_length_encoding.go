@@ -15,8 +15,7 @@ func RunLengthEncode(input string) string {
 	for i, current := range input {
 		if current == previous {
 			count++
-		} else
-		{
+		} else {
 			if i != 0 {
 				if count > 1 {
 					encoded += strconv.Itoa(count)
@@ -27,7 +26,7 @@ func RunLengthEncode(input string) string {
 			}
 		}
 
-		if i == len(input) - 1 {
+		if i == len(input)-1 {
 			if count > 1 {
 				encoded += strconv.Itoa(count)
 			}
@@ -47,7 +46,7 @@ func RunLengthDecode(input string) string {
 
 	for _, r := range input {
 		if unicode.IsDigit(r) {
-			previousNumber = int(r-'0') + previousNumber * 10
+			previousNumber = int(r-'0') + previousNumber*10
 		}
 
 		if unicode.IsLetter(r) || unicode.IsSpace(r) {
