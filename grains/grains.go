@@ -10,7 +10,7 @@ func Square(n int) (uint64, error) {
 		return 0, errors.New("invalid square")
 	}
 
-	return uint64(1 << uint(n - 1)), nil
+	return uint64(1 << uint(n-1)), nil
 }
 
 // Total calculates the total number of grains for the entire chessboard
