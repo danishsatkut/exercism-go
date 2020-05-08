@@ -1,33 +1,25 @@
 package wordcount
 
 import (
-	"regexp"
 	"strings"
+	"unicode"
 )
 
 // Frequency represents count of occurrences of each word
 type Frequency map[string]int
 
-var (
-	splitter      = regexp.MustCompile(`[\s\,\:]+`)
-	wordExtractor = regexp.MustCompile(`([\w\'])+`)
-	quotedWord    = regexp.MustCompile(`^\'(\w+)\'$`)
-)
-
 // WordCount calculates the occurrence of each word in a phrase
-func WordCount(sentence string) Frequency {
+func WordCount(phrase string) Frequency {
 	f := Frequency{}
 
-	words := splitter.Split(sentence, -1)
+	words := strings.FieldsFunc(phrase, func(r rune) bool {
+		return !(unicode.IsLetter(r) || unicode.IsDigit(r) || r == '\'')
+	})
 
 	for _, word := range words {
-		if w := wordExtractor.FindString(word); w != "" {
-			if quotedWord.MatchString(w) {
-				w = quotedWord.FindStringSubmatch(w)[1]
-			}
+		word = strings.Trim(word, "'")
 
-			f[strings.ToLower(w)]++
-		}
+		f[strings.ToLower(word)]++
 	}
 
 	return f
