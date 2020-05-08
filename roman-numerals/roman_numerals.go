@@ -2,6 +2,7 @@ package romannumerals
 
 import "errors"
 
+// ToRomanNumeral converts from arabic numbers to Roman Numerals
 func ToRomanNumeral(n int) (string, error) {
 	if n < 1 || n > 3000 {
 		return "", errors.New("out of range: " + string(n))
