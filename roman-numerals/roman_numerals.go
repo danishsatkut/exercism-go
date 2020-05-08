@@ -1,43 +1,22 @@
 package romannumerals
 
-import (
-	"fmt"
+import "errors"
+
+func ToRomanNumeral(n int) (string, error) {
+	if n < 1 || n > 3000 {
+		return "", errors.New("out of range: " + string(n))
+	}
+
+	return convert(n), nil
+}
+
+var (
+	ones      = []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
+	tens      = []string{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"}
+	hundreds  = []string{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
+	thousands = []string{"", "M", "MM", "MMM"}
 )
 
-type arabicToRoman struct {
-	arabic int
-	roman  string
-}
-
-var dictionary = []arabicToRoman{
-	{1000, "M"},
-	{900, "CM"},
-	{500, "D"},
-	{400, "CD"},
-	{100, "C"},
-	{90, "XC"},
-	{50, "L"},
-	{40, "XL"},
-	{10, "X"},
-	{9, "IX"},
-	{5, "V"},
-	{4, "IV"},
-	{1, "I"},
-}
-
-func ToRomanNumeral(number int) (string, error) {
-	var roman string
-
-	if number <= 0 || number > 3000 {
-		return "", fmt.Errorf("number %d is not allowed", number)
-	}
-
-	for _, item := range dictionary {
-		for number >= item.arabic {
-			roman += item.roman
-			number -= item.arabic
-		}
-	}
-
-	return roman, nil
+func convert(n int) string {
+	return thousands[n%1e4/1e3] + hundreds[n%1e3/1e2] + tens[n%1e2/1e1] + ones[n%1e1]
 }
