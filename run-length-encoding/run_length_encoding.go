@@ -3,6 +3,7 @@ package encode
 import (
 	"fmt"
 	"strconv"
+	"unicode"
 )
 
 func RunLengthEncode(input string) string {
@@ -38,4 +39,31 @@ func RunLengthEncode(input string) string {
 	}
 
 	return encoded
+}
+
+func RunLengthDecode(input string) string {
+	var decoded string
+	var previousNumber = 0
+
+	for _, r := range input {
+		if unicode.IsDigit(r) {
+			previousNumber = int(r-'0') + previousNumber * 10
+		}
+
+		if unicode.IsLetter(r) || unicode.IsSpace(r) {
+			char := string(r)
+
+			if previousNumber > 0 {
+				for i := 0; i < previousNumber; i++ {
+					decoded += char
+				}
+			} else {
+				decoded += char
+			}
+
+			previousNumber = 0
+		}
+	}
+
+	return decoded
 }
