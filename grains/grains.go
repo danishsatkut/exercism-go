@@ -16,3 +16,15 @@ func Square(n int) (uint64, error) {
 
 	return uint64(math.Exp2(float64(n - 1))), nil
 }
+
+func Total() uint64 {
+	var total uint64
+
+	for i := 1; i <= 64; i++ {
+		if value, err := Square(i); err == nil {
+			total += value
+		}
+	}
+
+	return total
+}
