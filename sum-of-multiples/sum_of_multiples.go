@@ -1,5 +1,7 @@
 package summultiples
 
+// SumMultiples calculates sum of all the unique multiples of particular
+// numbers up to but not including that number.
 func SumMultiples(upto int, numbers ...int) int {
 	uniqueMultiples := map[int]interface{}{}
 
@@ -12,7 +14,7 @@ func SumMultiples(upto int, numbers ...int) int {
 	}
 
 	total := 0
-	for m, _ := range uniqueMultiples {
+	for m := range uniqueMultiples {
 		total += m
 	}
 
