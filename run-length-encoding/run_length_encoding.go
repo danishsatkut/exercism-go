@@ -1,66 +1,53 @@
 package encode
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"unicode"
 )
 
 // RunLengthEncode encodes the provided string
-func RunLengthEncode(input string) string {
+func RunLengthEncode(data string) string {
 	var encoded strings.Builder
 
-	var previous rune
-	var count = 1
+	for len(data) > 0 {
+		char := data[0]
+		prevLen := len(data)
 
-	for i, current := range input {
-		if current == previous {
-			count++
-		} else {
-			if i != 0 {
-				encoded.WriteString(encodeRun(previous, count))
-				count = 1
-			}
-		}
-
-		if i == len(input)-1 {
-			encoded.WriteString(encodeRun(current, count))
-		}
-
-		previous = current
+		data = strings.TrimLeft(data, string(char))
+		encoded.WriteString(encodeRun(string(char), prevLen-len(data)))
 	}
 
 	return encoded.String()
 }
 
 // RunLengthDecode decodes the provided string
-func RunLengthDecode(input string) string {
-	var decoded strings.Builder
-	var runCount = 0
+func RunLengthDecode(encoded string) string {
+	var data strings.Builder
+	var runCount int
 
-	for _, r := range input {
+	for _, r := range encoded {
 		if unicode.IsDigit(r) {
 			runCount = int(r-'0') + runCount*10
 		}
 
 		if unicode.IsLetter(r) || unicode.IsSpace(r) {
-			decoded.WriteString(decodeRun(string(r), runCount))
+			data.WriteString(decodeRun(string(r), runCount))
 			runCount = 0
 		}
 	}
 
-	return decoded.String()
+	return data.String()
 }
 
-func encodeRun(char rune, count int) string {
-	var e string
+func encodeRun(char string, count int) string {
+	var n string
 
 	if count > 1 {
-		e += strconv.Itoa(count)
+		n = strconv.Itoa(count)
 	}
 
-	return e + fmt.Sprintf("%c", char)
+	return n + char
 }
 
 func decodeRun(char string, count int) string {
