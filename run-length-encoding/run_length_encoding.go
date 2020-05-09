@@ -9,7 +9,7 @@ import (
 
 // RunLengthEncode encodes the provided string
 func RunLengthEncode(input string) string {
-	var encoded string
+	var encoded strings.Builder
 
 	var previous rune
 	var count = 1
@@ -19,27 +19,19 @@ func RunLengthEncode(input string) string {
 			count++
 		} else {
 			if i != 0 {
-				if count > 1 {
-					encoded += strconv.Itoa(count)
-				}
-
-				encoded += fmt.Sprintf("%c", previous)
+				encoded.WriteString(encodeRun(previous, count))
 				count = 1
 			}
 		}
 
 		if i == len(input)-1 {
-			if count > 1 {
-				encoded += strconv.Itoa(count)
-			}
-
-			encoded += fmt.Sprintf("%c", current)
+			encoded.WriteString(encodeRun(current, count))
 		}
 
 		previous = current
 	}
 
-	return encoded
+	return encoded.String()
 }
 
 // RunLengthDecode decodes the provided string
@@ -59,6 +51,16 @@ func RunLengthDecode(input string) string {
 	}
 
 	return decoded.String()
+}
+
+func encodeRun(char rune, count int) string {
+	var e string
+
+	if count > 1 {
+		e += strconv.Itoa(count)
+	}
+
+	return e + fmt.Sprintf("%c", char)
 }
 
 func decodeRun(char string, count int) string {
