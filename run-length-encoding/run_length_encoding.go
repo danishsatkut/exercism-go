@@ -44,7 +44,7 @@ func RunLengthEncode(input string) string {
 
 // RunLengthDecode decodes the provided string
 func RunLengthDecode(input string) string {
-	var decoded string
+	var decoded strings.Builder
 	var runCount = 0
 
 	for _, r := range input {
@@ -53,12 +53,12 @@ func RunLengthDecode(input string) string {
 		}
 
 		if unicode.IsLetter(r) || unicode.IsSpace(r) {
-			decoded += decodeRun(string(r), runCount)
+			decoded.WriteString(decodeRun(string(r), runCount))
 			runCount = 0
 		}
 	}
 
-	return decoded
+	return decoded.String()
 }
 
 func decodeRun(char string, count int) string {
