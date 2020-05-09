@@ -3,9 +3,11 @@ package summultiples
 func SumMultiples(upto int, numbers ...int) int {
 	uniqueMultiples := map[int]interface{}{}
 
-	for _, number := range numbers {
-		for _, m := range multiples(number, upto) {
-			uniqueMultiples[m] = nil
+	for i := 0; i < upto; i++ {
+		for _, number := range numbers {
+			if multiple := number * i; multiple < upto {
+				uniqueMultiples[multiple] = nil
+			}
 		}
 	}
 
@@ -15,16 +17,4 @@ func SumMultiples(upto int, numbers ...int) int {
 	}
 
 	return total
-}
-
-func multiples(n int, upto int) []int {
-	var result []int
-
-	for i := 0; i < upto; i++ {
-		if m := n * i; m < upto {
-			result = append(result, m)
-		}
-	}
-
-	return result
 }
