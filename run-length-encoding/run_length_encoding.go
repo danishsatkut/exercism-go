@@ -45,25 +45,26 @@ func RunLengthEncode(input string) string {
 // RunLengthDecode decodes the provided string
 func RunLengthDecode(input string) string {
 	var decoded string
-	var previousNumber = 0
+	var runCount = 0
 
 	for _, r := range input {
 		if unicode.IsDigit(r) {
-			previousNumber = int(r-'0') + previousNumber*10
+			runCount = int(r-'0') + runCount*10
 		}
 
 		if unicode.IsLetter(r) || unicode.IsSpace(r) {
-			char := string(r)
-
-			if previousNumber > 0 {
-				decoded += strings.Repeat(char, previousNumber)
-			} else {
-				decoded += char
-			}
-
-			previousNumber = 0
+			decoded += decodeRun(string(r), runCount)
+			runCount = 0
 		}
 	}
 
 	return decoded
+}
+
+func decodeRun(char string, count int) string {
+	if count > 0 {
+		return strings.Repeat(char, count)
+	}
+
+	return char
 }
