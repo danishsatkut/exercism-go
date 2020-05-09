@@ -3,6 +3,7 @@ package encode
 import (
 	"fmt"
 	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -55,9 +56,7 @@ func RunLengthDecode(input string) string {
 			char := string(r)
 
 			if previousNumber > 0 {
-				for i := 0; i < previousNumber; i++ {
-					decoded += char
-				}
+				decoded += strings.Repeat(char, previousNumber)
 			} else {
 				decoded += char
 			}
