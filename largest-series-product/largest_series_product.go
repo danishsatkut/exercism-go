@@ -6,6 +6,8 @@ import (
 	"strconv"
 )
 
+// LargestSeriesProduct calculates the largest product for a
+// contiguous substring of digits of length n.
 func LargestSeriesProduct(digits string, span int) (int, error) {
 	if span < 0 {
 		return 0, errors.New("span must be greater than zero")
