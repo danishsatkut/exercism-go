@@ -20,7 +20,15 @@ func LargestSeriesProduct(digits string, span int) (int, error) {
 		return 1, nil
 	}
 
-	product, lenSub, maxProduct := 1, 0, 0
+	return largestProduct(digits, span)
+}
+
+func largestProduct(digits string, span int) (int, error) {
+	var (
+		windowLength  = 0
+		windowProduct = 1
+		maxProduct    = 0
+	)
 
 	for i := 0; i < len(digits); i++ {
 		if !unicode.IsNumber(rune(digits[i])) {
@@ -31,22 +39,22 @@ func LargestSeriesProduct(digits string, span int) (int, error) {
 
 		// Reset the window
 		if digit == 0 {
-			lenSub, product = 0, 1
+			windowLength, windowProduct = 0, 1
 			continue
 		}
 
-		if lenSub < span {
-			product *= digit
-			lenSub++
+		if windowLength < span {
+			windowProduct *= digit
+			windowLength++
 		}
 
-		if lenSub == span {
-			if maxProduct < product {
-				maxProduct = product
+		if windowLength == span {
+			if maxProduct < windowProduct {
+				maxProduct = windowProduct
 			}
 
-			product /= parseDigitAt(digits, i-span+1)
-			lenSub--
+			windowProduct /= parseDigitAt(digits, i-span+1)
+			windowLength--
 		}
 	}
 
