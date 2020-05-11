@@ -2,8 +2,7 @@ package lsproduct
 
 import (
 	"errors"
-	"math"
-	"strconv"
+	"unicode"
 )
 
 // LargestSeriesProduct calculates the largest product for a
@@ -21,36 +20,39 @@ func LargestSeriesProduct(digits string, span int) (int, error) {
 		return 1, nil
 	}
 
-	var product int
+	product, lenSub, maxProduct := 1, 0, 0
 
-	for i := 0; i+span <= len(digits); i++ {
-		s := digits[i : i+span]
-
-		n, err := strconv.Atoi(s)
-		if err != nil {
-			return 0, err
+	for i := 0; i < len(digits); i++ {
+		if !unicode.IsNumber(rune(digits[i])) {
+			return 0, errors.New("digits must only contain digits")
 		}
 
-		if p := productOfDigits(n, span); p > product {
-			product = p
+		digit := parseDigitAt(digits, i)
+
+		// Reset the window
+		if digit == 0 {
+			lenSub, product = 0, 1
+			continue
+		}
+
+		if lenSub < span {
+			product *= digit
+			lenSub++
+		}
+
+		if lenSub == span {
+			if maxProduct < product {
+				maxProduct = product
+			}
+
+			product /= parseDigitAt(digits, i-span+1)
+			lenSub--
 		}
 	}
 
-	return product, nil
+	return maxProduct, nil
 }
 
-func productOfDigits(n, count int) int {
-	product := 1
-
-	for count > 0 {
-		count--
-
-		x := int(math.Pow10(count))
-		digit := n / x
-		n -= digit * x
-
-		product *= digit
-	}
-
-	return product
+func parseDigitAt(digits string, i int) int {
+	return int(digits[i]) - 48
 }
