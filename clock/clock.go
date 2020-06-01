@@ -37,7 +37,7 @@ func (c Clock) String() string {
 
 // Add adds specified minutes to the clock
 func (c Clock) Add(minutes int) Clock {
-	h := minutes / 60
+	h := (minutes / 60) % 24
 	m := minutes % 60
 
 	m = c.minutes + m
@@ -46,9 +46,9 @@ func (c Clock) Add(minutes int) Clock {
 		m = m - 60
 	}
 
-	h = c.hour + (h % 24)
+	h = c.hour + h
 	if h >= 24 {
-		h -= 24
+		h = h - 24
 	}
 
 	return Clock{h, m}
