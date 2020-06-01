@@ -6,16 +6,12 @@ import (
 
 // New creates a clock with the specified hour and minutes
 func New(hour, minutes int) Clock {
-	if hour >= 24 {
-		hour = hour % 24
-	}
-
+	hour = hour % 24
 	if hour < 0 {
-		hour = 24 + (hour % 24)
+		hour = 24 + hour
 	}
 
 	c := Clock{hour, 0}
-
 	if minutes < 0 {
 		return c.Subtract(minutes * -1)
 	}
