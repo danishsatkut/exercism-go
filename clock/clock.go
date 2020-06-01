@@ -4,6 +4,7 @@ import (
 	"strconv"
 )
 
+// New creates a clock with the specified hour and minutes
 func New(hour, minutes int) Clock {
 	if hour >= 24 {
 		hour = hour % 24
@@ -22,6 +23,7 @@ func New(hour, minutes int) Clock {
 	return c.Add(minutes)
 }
 
+// Clock represents a clock with hour and minutes
 type Clock struct {
 	hour, minutes int
 }
@@ -33,6 +35,7 @@ func (c Clock) String() string {
 	return h + ":" + m
 }
 
+// Add adds specified minutes to the clock
 func (c Clock) Add(minutes int) Clock {
 	h := minutes / 60
 	m := minutes % 60
@@ -51,6 +54,7 @@ func (c Clock) Add(minutes int) Clock {
 	return Clock{h, m}
 }
 
+// Subtract subtracts specified minutes from the clock
 func (c Clock) Subtract(minutes int) Clock {
 	h := (minutes / 60) % 24
 	m := minutes % 60
