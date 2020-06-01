@@ -39,13 +39,13 @@ func (c Clock) Add(minutes int) Clock {
 
 	m = c.minutes + m
 	if m >= 60 {
-		h += 1
+		h++
 		m = m - 60
 	}
 
 	h = c.hour + (h % 24)
 	if h >= 24 {
-		h = h - 24
+		h -= 24
 	}
 
 	return Clock{h, m}
@@ -57,8 +57,7 @@ func (c Clock) Subtract(minutes int) Clock {
 
 	m = c.minutes - m
 	if m < 0 {
-		h = h + 1
-
+		h++
 		m = 60 + m
 	}
 
