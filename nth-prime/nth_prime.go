@@ -1,5 +1,6 @@
 package prime
 
+// Nth returns the prime number at nth position.
 func Nth(n int) (int, bool) {
 	if n == 0 {
 		return 0, false
@@ -19,7 +20,7 @@ func Nth(n int) (int, bool) {
 
 func isPrime(primes []int, number int) bool {
 	for _, prime := range primes {
-		if number % prime == 0 {
+		if number%prime == 0 {
 			return false
 		}
 	}
