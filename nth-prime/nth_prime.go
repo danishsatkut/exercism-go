@@ -7,9 +7,8 @@ func Nth(n int) (int, bool) {
 	}
 
 	primes := make([]int, 0, n)
-	primes = append(primes, 2)
 
-	for i := 3; len(primes) <= n; i++ {
+	for i := 2; len(primes) <= n; i++ {
 		if isPrime(primes, i) {
 			primes = append(primes, i)
 		}
