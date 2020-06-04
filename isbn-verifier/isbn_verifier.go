@@ -1,7 +1,6 @@
 package isbn
 
 import (
-	"strconv"
 	"strings"
 	"unicode"
 )
@@ -17,17 +16,21 @@ func IsValidISBN(isbn string) bool {
 		return false
 	}
 
+	return isValidChecksum(isbn)
+}
+
+func isValidChecksum(isbn string) bool {
 	checksum := 0
+
 	for i, r := range isbn {
 		if i == 9 && r == 'X' {
 			checksum += 10
 		} else {
-			v, err := strconv.Atoi(string(r))
-			if err != nil {
+			if !unicode.IsDigit(r) {
 				return false
 			}
 
-			checksum += v * (10 - i)
+			checksum += int(r - '0') * (10 - i)
 		}
 	}
 
