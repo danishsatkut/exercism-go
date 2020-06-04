@@ -5,6 +5,7 @@ import (
 	"unicode"
 )
 
+// IsValidISBN checks the validity of the specified ISBN.
 func IsValidISBN(isbn string) bool {
 	isbn = strings.ReplaceAll(isbn, "-", "")
 
@@ -30,7 +31,7 @@ func isValidChecksum(isbn string) bool {
 				return false
 			}
 
-			checksum += int(r - '0') * (10 - i)
+			checksum += int(r-'0') * (10 - i)
 		}
 	}
 
