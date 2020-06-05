@@ -22,3 +22,11 @@ func TestConvertToISBN13(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkConvertToISBN13(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, n := range testCases {
+			ConvertToISBN13(n.isbn)
+		}
+	}
+}
