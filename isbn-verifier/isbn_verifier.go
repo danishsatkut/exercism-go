@@ -24,20 +24,14 @@ func isValidChecksum(isbn string) bool {
 	checksum := 0
 
 	for i, r := range isbn {
-		if i == 9 && r == 'X' {
+		if unicode.IsDigit(r) {
+			checksum += int(r-'0') * (10 - i)
+		} else if i == 9 && r == 'X' {
 			checksum += 10
 		} else {
-			if !unicode.IsDigit(r) {
-				return false
-			}
-
-			checksum += int(r-'0') * (10 - i)
+			return false
 		}
 	}
 
-	if checksum%11 == 0 {
-		return true
-	}
-
-	return false
+	return checksum%11 == 0
 }
