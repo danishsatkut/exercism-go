@@ -11,7 +11,7 @@ var testCases = []struct {
 	description string
 }{
 	{"3-598-21508-8", "978-3-598-21508-7", true, "valid isbn number"},
-	{"3-598-21508-9", "", false, "invalid isbn check digit"},
+	{"3-598-21508-9", "978-3-598-21508-9", false, "invalid isbn check digit"},
 	{"3-598-21507-X", "978-3-598-21507-0", true, "valid isbn number with a check digit of 10"},
 	{"3-598-21507-A", "", false, "check digit is a character other than X"},
 	{"3-598-P1581-X", "", false, "invalid character in isbn"},

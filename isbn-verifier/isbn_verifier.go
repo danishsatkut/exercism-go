@@ -16,6 +16,15 @@ func IsValidISBN(isbn string) bool {
 	return isValidChecksum(isbn)
 }
 
+func IsValidISBN13(isbn string) bool {
+	isbn = strings.ReplaceAll(isbn, "-", "")
+	if len(isbn) != 13 {
+		return false
+	}
+
+	return isValidISBN13Checksum(isbn)
+}
+
 func isValidChecksum(isbn string) bool {
 	checksum := 0
 
@@ -30,4 +39,23 @@ func isValidChecksum(isbn string) bool {
 	}
 
 	return checksum%11 == 0
+}
+
+func isValidISBN13Checksum(isbn string) bool {
+	checksum := 0
+
+	for i, r := range isbn {
+		if !unicode.IsDigit(r) {
+			return false
+		}
+
+		digit := int(r - '0')
+		if i%2 == 0 {
+			checksum += digit
+		} else {
+			checksum += digit * 3
+		}
+	}
+
+	return checksum%10 == 0
 }
