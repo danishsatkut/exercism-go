@@ -2,7 +2,6 @@ package isbn
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 	"unicode"
@@ -32,7 +31,7 @@ func generateCheckDigitForISBN13(isbn string) string {
 }
 
 func formatISBN13(isbn, checkDigit string) string {
-	return fmt.Sprintf("%s-%s-%s-%s-%s", isbn[0:3], isbn[3:4], isbn[4:7], isbn[7:12], checkDigit)
+	return isbn[0:3] + "-" + isbn[3:4] + "-" + isbn[4:7] + "-" + isbn[7:12] + "-" + checkDigit
 }
 
 func calculateISBN13Checksum(isbn string) (int, error) {
