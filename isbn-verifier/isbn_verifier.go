@@ -5,27 +5,21 @@ import (
 	"unicode"
 )
 
-// IsValidISBN checks the validity of the specified ISBN.
+// IsValidISBN checks the validity of the specified ISBN-10.
 func IsValidISBN(isbn string) bool {
 	isbn = strings.ReplaceAll(isbn, "-", "")
 
-	if len(isbn) != 10 {
+	switch len(isbn) {
+	case 10:
+		return isValidISBN10Checksum(isbn)
+	case 13:
+		return isValidISBN13Checksum(isbn)
+	default:
 		return false
 	}
-
-	return isValidChecksum(isbn)
 }
 
-func IsValidISBN13(isbn string) bool {
-	isbn = strings.ReplaceAll(isbn, "-", "")
-	if len(isbn) != 13 {
-		return false
-	}
-
-	return isValidISBN13Checksum(isbn)
-}
-
-func isValidChecksum(isbn string) bool {
+func isValidISBN10Checksum(isbn string) bool {
 	checksum := 0
 
 	for i, r := range isbn {
