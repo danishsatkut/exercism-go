@@ -11,15 +11,15 @@ func IsValidISBN(isbn string) bool {
 
 	switch len(isbn) {
 	case 10:
-		return isValidISBN10Checksum(isbn)
+		return isValidISBN10(isbn)
 	case 13:
-		return isValidISBN13Checksum(isbn)
+		return isValidISBN13(isbn)
 	default:
 		return false
 	}
 }
 
-func isValidISBN10Checksum(isbn string) bool {
+func isValidISBN10(isbn string) bool {
 	checksum := 0
 
 	for i, r := range isbn {
@@ -35,7 +35,7 @@ func isValidISBN10Checksum(isbn string) bool {
 	return checksum%11 == 0
 }
 
-func isValidISBN13Checksum(isbn string) bool {
+func isValidISBN13(isbn string) bool {
 	checksum, err := calculateISBN13Checksum(isbn)
 	if err != nil {
 		return false
