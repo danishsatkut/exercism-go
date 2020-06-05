@@ -13,10 +13,6 @@ func IsValidISBN(isbn string) bool {
 		return false
 	}
 
-	if unicode.IsLetter(rune(isbn[9])) && isbn[9] != 'X' {
-		return false
-	}
-
 	return isValidChecksum(isbn)
 }
 
