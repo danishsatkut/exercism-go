@@ -42,19 +42,9 @@ func isValidChecksum(isbn string) bool {
 }
 
 func isValidISBN13Checksum(isbn string) bool {
-	checksum := 0
-
-	for i, r := range isbn {
-		if !unicode.IsDigit(r) {
-			return false
-		}
-
-		digit := int(r - '0')
-		if i%2 == 0 {
-			checksum += digit
-		} else {
-			checksum += digit * 3
-		}
+	checksum, err := calculateISBN13Checksum(isbn)
+	if err != nil {
+		return false
 	}
 
 	return checksum%10 == 0
