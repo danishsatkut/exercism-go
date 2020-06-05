@@ -6,7 +6,7 @@ package isbn
 
 var testCases = []struct {
 	isbn        string
-	isbn13 		string
+	isbn13      string
 	expected    bool
 	description string
 }{
