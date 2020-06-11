@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// Clock represents a clock with hour and minutes
+// Clock represents a clock using minutes
 type Clock struct {
 	minutes int
 }
