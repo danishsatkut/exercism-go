@@ -1,7 +1,7 @@
 package clock
 
 import (
-	"strconv"
+	"fmt"
 )
 
 // New creates a clock with the specified hour and minutes
@@ -25,10 +25,7 @@ type Clock struct {
 }
 
 func (c Clock) String() string {
-	h := formattedTime(c.hour)
-	m := formattedTime(c.minutes)
-
-	return h + ":" + m
+	return fmt.Sprintf("%02d:%02d", c.hour, c.minutes)
 }
 
 // Add adds specified minutes to the clock
@@ -67,13 +64,4 @@ func (c Clock) Subtract(minutes int) Clock {
 	}
 
 	return Clock{h, m}
-}
-
-func formattedTime(n int) string {
-	t := strconv.Itoa(n)
-	if n < 10 {
-		t = "0" + t
-	}
-
-	return t
 }
