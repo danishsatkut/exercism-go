@@ -11,20 +11,13 @@ type Clock struct {
 
 // New creates a clock with the specified hour and minutes
 func New(hour, minutes int) Clock {
-	hour = hour + (minutes / 60)
-	minutes = minutes % 60
-
-	if minutes < 0 {
-		hour--
-		minutes = 60 + minutes
+	m := minutes + hour*60
+	m %= 24 * 60
+	if m < 0 {
+		m += 24 * 60
 	}
 
-	hour = hour % 24
-	if hour < 0 {
-		hour = 24 + hour
-	}
-
-	return Clock{hour*60 + minutes}
+	return Clock{m}
 }
 
 func (c Clock) String() string {
