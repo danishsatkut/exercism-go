@@ -16,18 +16,27 @@ func Frequency(s string) FreqMap {
 }
 
 func ConcurrentFrequency(texts []string) FreqMap {
-	mu := sync.RWMutex{}
-	m := FreqMap{}
+	var (
+		mu = sync.RWMutex{}
+		m  = FreqMap{}
+		wg = sync.WaitGroup{}
+	)
 
 	for _, text := range texts {
+		wg.Add(1)
+
 		go func(t string) {
 			for _, r := range t {
 				mu.Lock()
 				m[r]++
 				mu.Unlock()
 			}
+
+			wg.Done()
 		}(text)
 	}
+
+	wg.Wait()
 
 	return m
 }
