@@ -15,10 +15,12 @@ func Frequency(s string) FreqMap {
 	return m
 }
 
+// ConcurrentFrequency concurrently counts the frequency of each rune in a given text
+//  and returns this data as a FreqMap.
 func ConcurrentFrequency(texts []string) FreqMap {
 	var (
-		mu = sync.RWMutex{}
 		m  = FreqMap{}
+		mu = sync.RWMutex{}
 		wg = sync.WaitGroup{}
 	)
 
@@ -26,13 +28,13 @@ func ConcurrentFrequency(texts []string) FreqMap {
 		wg.Add(1)
 
 		go func(t string) {
+			defer wg.Done()
+
 			for _, r := range t {
 				mu.Lock()
 				m[r]++
 				mu.Unlock()
 			}
-
-			wg.Done()
 		}(text)
 	}
 
