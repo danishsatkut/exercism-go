@@ -1,13 +1,18 @@
 # Crypto Square
 
+Welcome to Crypto Square on Exercism's Go Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
 Implement the classic method for composing secret messages called a square code.
 
 Given an English text, output the encoded version of that text.
 
 First, the input is normalized: the spaces and punctuation are removed
-from the English text and the message is downcased.
+from the English text and the message is down-cased.
 
-Then, the normalized characters are broken into rows.  These rows can be
+Then, the normalized characters are broken into rows. These rows can be
 regarded as forming a rectangle when printed with intervening newlines.
 
 For example, the sentence
@@ -22,10 +27,15 @@ is normalized to:
 "ifmanwasmeanttostayonthegroundgodwouldhavegivenusroots"
 ```
 
-The plaintext should be organized in to a rectangle.  The size of the
-rectangle (`r x c`) should be decided by the length of the message,
-such that `c >= r` and `c - r <= 1`, where `c` is the number of columns
-and `r` is the number of rows.
+The plaintext should be organized in to a rectangle. The size of the
+rectangle should be decided by the length of the message.
+
+If `c` is the number of columns and `r` is the number of rows, then for
+the rectangle `r` x `c` find the smallest possible integer `c` such that:
+
+- `r * c >= length(message)`,
+- and `c >= r`,
+- and `c - r <= 1`.
 
 Our normalized text is 54 characters long, dictating a rectangle with
 `c = 8` and `r = 7`:
@@ -72,31 +82,24 @@ ciphertext back in to the original message:
 "sseoau "
 ```
 
-## Coding the solution
-
-Look for a stub file having the name crypto_square.go
-and place your solution code in that file.
-
-## Running the tests
-
-To run the tests run the command `go test` from within the exercise directory.
-
-If the test suite contains benchmarks, you can run these with the `--bench` and `--benchmem`
-flags:
-
-    go test -v --bench . --benchmem
-
-Keep in mind that each reviewer will run benchmarks on a different machine, with
-different specs, so the results from these benchmark tests may vary.
-
-## Further information
-
-For more detailed information about the Go track, including how to get help if
-you're having trouble, please visit the exercism.io [Go language page](http://exercism.io/languages/go/resources).
-
 ## Source
 
-J Dalbey's Programming Practice problems [http://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html](http://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html)
+### Contributed to by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @alebaffa
+- @bitfield
+- @ekingery
+- @eraserix
+- @ferhatelmas
+- @hilary
+- @kytrinyx
+- @leenipper
+- @petertseng
+- @robphoenix
+- @sebito91
+- @soniakeys
+- @tleen
+
+### Based on
+
+J Dalbey's Programming Practice problems - http://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html
